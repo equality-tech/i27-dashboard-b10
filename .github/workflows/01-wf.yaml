@@ -6,9 +6,9 @@ on:
       - master
       - feature
     paths:
-      - 'src/**'
-      - 'pom.xml'
-      - 'Docker.file'
+      - src/**
+      - pom.xml
+      - Docker.file
       
 jobs:
 
