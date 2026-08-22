@@ -1,25 +1,35 @@
-name: my first github job
+name: failing 1 step in job1
 on:
   workflow_dispatch:
 
 jobs:
   first-job:
     runs-on: ubuntu-latest
+    
     steps:
       - name: printing welcome message job1
         run: |
           sleep 10
           echo "welcome to github actions by job1"
+          exit 1
+          
       - name: printing bye message job1
         run: |
           echo "bye from job1"
+          
+      - name: printing 1 more bye message job1
+        run: |
+          echo "one more bye from job1"
+          
   second-job:
     runs-on: ubuntu-latest
+    
     steps:
       - name: printing hellow message job2
         run: |
           sleep 5
           echo "welcome to github actions by job2"
+          
       - name: printing bye message job2
         run: |
           echo "bye from job2"
