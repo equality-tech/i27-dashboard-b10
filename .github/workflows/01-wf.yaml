@@ -1,4 +1,4 @@
-name: failing 1 step in job1
+name: adding dependancy between jobs
 on:
   workflow_dispatch:
 
