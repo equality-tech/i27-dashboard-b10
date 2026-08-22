@@ -23,7 +23,7 @@ jobs:
           
   second-job:
     runs-on: ubuntu-latest
-    
+    needs: first-job
     steps:
       - name: printing hellow message job2
         run: |
