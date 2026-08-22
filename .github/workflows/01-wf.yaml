@@ -16,6 +16,7 @@ jobs:
       - name: printing bye message job1
         run: |
           echo "bye from job1"
+          exit 1
           
       - name: printing 1 more bye message job1
         run: |
