@@ -1,17 +1,14 @@
 name: on push example
 on:
-  push: 
+  pull_request:
     branches:
-      - main
       - master
-    paths:
-      - src/**
-      - pom.xml
-      - Dockerfile
-    # paths-ignore:
-    #   - .env.example
-    #   - .gitignore
-    #   - README.md
+    types:
+      - opened
+      - closed
+      - reopened
+      - synchronize
+      
 jobs:
 
   first-job:
