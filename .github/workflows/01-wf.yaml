@@ -1,1 +1,20 @@
+name: my first github job
+on:
+  workflow_dispatch:
 
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: printing welcome message
+        run: |
+          echo "welcome to github actions"
+      - name: print date of sys
+        run: |
+          echo date
+      - name: printing bye message
+        run: |
+          echo "bye from github actions"
+        
+      
+  
