@@ -6,15 +6,20 @@ jobs:
   first-job:
     runs-on: ubuntu-latest
     steps:
-      - name: printing welcome message
+      - name: printing welcome message job1
         run: |
-          echo "welcome to github actions"
-      - name: print date of sys
+          sleep 10
+          echo "welcome to github actions by job1"
+      - name: printing bye message job1
         run: |
-          date
-      - name: printing bye message
+          echo "bye from job1"
+  second-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: printing hellow message job2
         run: |
-          echo "bye from github actions"
-        
-      
-  
+          sleep 5
+          echo "welcome to github actions by job2"
+      - name: printing bye message job2
+        run: |
+          echo "bye from job2"
