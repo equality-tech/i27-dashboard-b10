@@ -1,6 +1,11 @@
 name: Pull Request Event
 on: 
     pull_request: 
+      types:
+        - closed
+        - reopened
+        - opened
+        - synchronize
 jobs:
     show-information:
         name: Push Trigger info
