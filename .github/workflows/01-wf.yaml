@@ -8,7 +8,10 @@ on:
       - src/**
       - pom.xml
       - Dockerfile
-      
+    paths-ignore:
+      - .env.example
+      - .gitignore
+      - README.md
 jobs:
 
   first-job:
