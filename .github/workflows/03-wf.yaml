@@ -7,5 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          git clone "https://github.com/mdbashee333/i27-dashboard-b10.git"
+          git clone "https://github.com/mdbasheer333/i27-dashboard-b10.git"
           ls -la
