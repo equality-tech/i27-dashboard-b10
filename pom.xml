@@ -18,7 +18,7 @@
     <description>DevOps Dashboard — tracks deployments, pipeline runs, and service health</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
