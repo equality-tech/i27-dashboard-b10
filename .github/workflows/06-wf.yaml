@@ -3,34 +3,18 @@ on: workflow_dispatch
 
 env:
   APP_NAME: my-demo-app
-  PORT: 3000
 
 jobs:
 
   first-job:
     env:
-      JOB1_ID: my-job1
+      APP_NAME: my-demo-app-job
     runs-on: ubuntu-latest
     steps:
       - name: step1 steps
         env:
-          STEP1_ID: my-step1
+          APP_NAME: my-demo-app-step
         run: |
           echo "======================"
           echo "APP_NAME is $APP_NAME"
-          echo "PORT is $PORT"
-          echo "JO1B_ID is $JOB1_ID"
-          echo "STEP1_ID is $STEP1_ID"
-          echo "======================"      
-
-      - name: step2 steps
-        env:
-          STEP2_ID: my-step2
-        run: |
-          echo "======================"
-          echo "APP_NAME is $APP_NAME"
-          echo "PORT is $PORT"
-          echo "JO1B_ID is $JOB1_ID"
-          echo "STEP1_ID is $STEP1_ID"
-          echo "STEP2_ID is $STEP2_ID"
-          echo "======================"           
+          echo "======================"               
