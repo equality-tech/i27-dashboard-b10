@@ -30,7 +30,7 @@ jobs:
 
 
   prod-job:
-    environment: Developement
+    environment: Production
     needs: test-job
     runs-on: ubuntu-latest
     
