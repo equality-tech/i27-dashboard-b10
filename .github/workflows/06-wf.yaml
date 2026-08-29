@@ -8,6 +8,8 @@ env:
 jobs:
 
   first-job:
+    env:
+      JOB1_ID: my-job1
     runs-on: ubuntu-latest
     steps:
       - name: printing the wf level env var
@@ -15,14 +17,21 @@ jobs:
           echo "======================"
           echo "APP_NAME is $APP_NAME"
           echo "PORT is $PORT"
+          echo "PORT is $PORT"
+          echo "JO1B_ID is $JOB1_ID"
           echo "======================"       
           
   second-job:
-    runs-on: ubuntu-latest
+    needs: first-job
+    runs-on: ubuntu-latest    
+    env:
+      JOB2_ID: my-job2
     steps:
       - name: printing the wf level env var
         run: |         
           echo "========OTHER WAY OF ACCESS=============="
           echo "APP_NAME is ${{env.APP_NAME}}"
           echo "PORT is ${{env.PORT}}"
+          echo "JOB1_ID is $JOB1_ID"
+          echo "JOB2_ID is $JOB2_ID"
           echo "======================"
