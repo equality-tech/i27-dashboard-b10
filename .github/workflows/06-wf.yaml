@@ -12,7 +12,7 @@ on:
           - Production
 
 jobs:
-  dev-job:
+  job:
     environment: ${{inputs.select_env}}
     runs-on: ubuntu-latest
     
