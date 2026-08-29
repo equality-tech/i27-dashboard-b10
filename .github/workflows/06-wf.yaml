@@ -9,7 +9,7 @@ jobs:
       - name: job1 step1 statements
         run: |
           echo "======================"
-          echo "APP_NAME=my-demo-app">>"$GITHUB_ENV"
+          echo "APP_NAME=my-demo-app">>"$GITHUB_OUTPUT"
           echo "$APP_NAME"      
           echo "======================"               
       - name: job1 step2 steps
