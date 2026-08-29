@@ -7,24 +7,13 @@ jobs:
     
     steps:
       - name: job1 step1 statements
+        id: mystep1
         run: |
           echo "======================"
-          echo "APP_NAME=my-demo-app">>"$GITHUB_OUTPUT"
-          echo "$APP_NAME"      
+          echo "APP_NAME=my-demo-app">>"$GITHUB_OUTPUT"     
           echo "======================"               
       - name: job1 step2 steps
         run: |
           echo "======================"
-          echo "$APP_NAME"        
-          echo "======================"  
-
-  second-job:
-    needs: first-job
-    runs-on: ubuntu-latest
-    
-    steps:           
-      - name: job2 step1 steps
-        run: |
-          echo "======================"
-          echo "$APP_NAME"        
+          echo "${{steps.mystep1.outputs.APP_NAME}}"         
           echo "======================"  
