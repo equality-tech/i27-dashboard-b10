@@ -17,3 +17,16 @@ jobs:
           echo "======================"
           echo "${{steps.mystep1.outputs.APP_NAME}}"         
           echo "======================"  
+    outputs:
+      APP_NAME: ${{steps.mystep1.outputs.APP_NAME}}
+      
+  second-job:
+    runs-on: ubuntu-latest
+    needs: first-job
+    steps:
+      - name: job1 step1 statements
+        id: mystep1
+        run: |
+          echo "======================"
+          echo "${{needs.first-job.outputs.APP_NAME}}"     
+          echo "======================"               
