@@ -2,28 +2,42 @@ name: env var demo
 on: workflow_dispatch
 
 jobs:
-  first-job:
+  dev-job:
+    environment: Developement
     runs-on: ubuntu-latest
     
     steps:
       - name: job1 step1 statements
         run: |
           echo "======================"
-          echo "ORG_NAME name is ${{vars.ORG_NAME}}"     
-          echo "ORG_PASSWORD name is ${{secrets.ORG_PASSWORD}}"   
-          
-          echo "REPO_NAME name is ${{vars.REPO_NAME}}"     
-          echo "REPO_SECRETE name is ${{secrets.REPO_SECRETE}}"  
+          echo "HOST_NAME name is ${{vars.HOST_NAME}}"     
+          echo "HOST_PWD name is ${{secrets.HOST_PWD}}"   
           echo "======================"               
       
-  second-job:
+
+  test-job:
+    environment: Testing
+    needs: dev-job
     runs-on: ubuntu-latest
+    
     steps:
-      - name: job2 step1 statements      
+      - name: job2 step1 statements
         run: |
           echo "======================"
-          echo "ORG_NAME name is ${{vars.ORG_NAME}}"     
-          echo "ORG_PASSWORD name is ${{secrets.ORG_PASSWORD}}"           
-          echo "REPO_NAME name is ${{vars.REPO_NAME}}"     
-          echo "REPO_SECRETE name is ${{secrets.REPO_SECRETE}}"  
-          echo "======================"               
+          echo "HOST_NAME name is ${{vars.HOST_NAME}}"     
+          echo "HOST_PWD name is ${{secrets.HOST_PWD}}"   
+          echo "======================"              
+
+
+  prod-job:
+    environment: Developement
+    needs: test-job
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: job3 step1 statements
+        run: |
+          echo "======================"
+          echo "HOST_NAME name is ${{vars.HOST_NAME}}"     
+          echo "HOST_PWD name is ${{secrets.HOST_PWD}}"   
+          echo "======================"  
