@@ -1,20 +1,29 @@
 name: env var demo
 on: workflow_dispatch
 
-env:
-  APP_NAME: my-demo-app
-
 jobs:
-
   first-job:
-    env:
-      APP_NAME: my-demo-app-job
     runs-on: ubuntu-latest
+    
     steps:
-      - name: step1 steps
-        env:
-          APP_NAME: my-demo-app-step
+      - name: job1 step1 statements
         run: |
           echo "======================"
-          echo "APP_NAME is $APP_NAME"
+          echo "APP_NAME=my-demo-app">>"$GITHUB_ENV"
+          echo "$APP_NAME"      
           echo "======================"               
+      - name: job1 step2 steps
+        run: |
+          echo "======================"
+          echo "$APP_NAME"        
+          echo "======================"  
+
+  second-job:
+    runs-on: ubuntu-latest
+    
+    steps:           
+      - name: job2 step1 steps
+        run: |
+          echo "======================"
+          echo "$APP_NAME"        
+          echo "======================"  
