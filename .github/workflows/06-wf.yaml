@@ -31,7 +31,7 @@ jobs:
 
   prod-job:
     environment: Production
-    needs: test-job
+    needs: [dev-job, test-job]
     runs-on: ubuntu-latest
     
     steps:
