@@ -1,9 +1,19 @@
 name: env var demo
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+    inputs:
+      select_env:
+        default: Testing
+        description: this is to select the environment before running
+        type: choice
+        options:
+          - Testing
+          - Developement
+          - Production
 
 jobs:
   dev-job:
-    environment: Developement
+    environment: ${{inputs.select_env}}
     runs-on: ubuntu-latest
     
     steps:
@@ -13,31 +23,3 @@ jobs:
           echo "HOST_NAME name is ${{vars.HOST_NAME}}"     
           echo "HOST_PWD name is ${{secrets.HOST_PWD}}"   
           echo "======================"               
-      
-
-  test-job:
-    environment: Testing
-    needs: dev-job
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: job2 step1 statements
-        run: |
-          echo "======================"
-          echo "HOST_NAME name is ${{vars.HOST_NAME}}"     
-          echo "HOST_PWD name is ${{secrets.HOST_PWD}}"   
-          echo "======================"              
-
-
-  prod-job:
-    environment: Production
-    needs: [dev-job, test-job]
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: job3 step1 statements
-        run: |
-          echo "======================"
-          echo "HOST_NAME name is ${{vars.HOST_NAME}}"     
-          echo "HOST_PWD name is ${{secrets.HOST_PWD}}"   
-          echo "======================"  
