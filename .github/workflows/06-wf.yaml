@@ -7,26 +7,23 @@ jobs:
     
     steps:
       - name: job1 step1 statements
-        id: mystep1
         run: |
           echo "======================"
-          echo "APP_NAME=my-demo-app">>"$GITHUB_OUTPUT"     
+          echo "ORG_NAME name is ${{vars.ORG_NAME}}"     
+          echo "ORG_PASSWORD name is ${{secrets.ORG_PASSWORD}}"   
+          
+          echo "REPO_NAME name is ${{vars.REPO_NAME}}"     
+          echo "REPO_SECRETE name is ${{secrets.REPO_SECRETE}}"  
           echo "======================"               
-      - name: job1 step2 steps
-        run: |
-          echo "======================"
-          echo "${{steps.mystep1.outputs.APP_NAME}}"         
-          echo "======================"  
-    outputs:
-      APP_NAME: ${{steps.mystep1.outputs.APP_NAME}}
       
   second-job:
     runs-on: ubuntu-latest
-    needs: first-job
     steps:
-      - name: job1 step1 statements
-        id: mystep1
+      - name: job2 step1 statements      
         run: |
           echo "======================"
-          echo "${{needs.first-job.outputs.APP_NAME}}"     
+          echo "ORG_NAME name is ${{vars.ORG_NAME}}"     
+          echo "ORG_PASSWORD name is ${{secrets.ORG_PASSWORD}}"           
+          echo "REPO_NAME name is ${{vars.REPO_NAME}}"     
+          echo "REPO_SECRETE name is ${{secrets.REPO_SECRETE}}"  
           echo "======================"               
