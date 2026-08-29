@@ -1,0 +1,21 @@
+name: env var demo
+on: workflow_dispatch
+
+env:
+  APP_NAME: my-demo-app
+  PORT: 3000
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: printing the wf level env var
+        run: |
+          echo "======================"
+          echo "APP_NAME is $APP_NAME"
+          echo "PORT is $PORT"
+          echo "======================"
+          echo "========OTHER WAY OF ACCESS=============="
+          echo "APP_NAME is ${{env.APP_NAME}}"
+          echo "PORT is ${{env.PORT}}"
+          echo "======================"
