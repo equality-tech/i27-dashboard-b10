@@ -1,0 +1,16 @@
+name: demo wf for checking out the code
+on: workflow_dispatch
+
+jobs:
+  code-checkout:
+    name: job for checking out code
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          git clone "https://github.com/mdbasheer333/i27-dashboard-b10.git"
+          ls -la
+      - run: |
+          ls -la
+          cd i27-dashboard-b10
+          mvn clean package
+          ls -la

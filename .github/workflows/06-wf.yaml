@@ -1,0 +1,33 @@
+name: env var demo
+on: 
+  workflow_dispatch:
+    inputs:
+      select_env:
+        default: Testing
+        description: this is to select the environment before running
+        type: choice
+        options:
+          - Testing
+          - Developement
+          - Production
+
+jobs:
+  job:
+    environment: ${{inputs.select_env}}
+    runs-on: ubuntu-latest    
+    steps:
+      - name: job1 step1 statements        
+        run: |
+          echo "======================"
+          echo "HOST_NAME name is ${{toJson(github)}}"     
+          echo "HOST_NAME name is ${{toJson(runner)}}"     
+          echo "HOST_NAME name is ${{toJson(vars)}}"     
+          echo "HOST_NAME name is ${{toJson(job)}}"             
+          echo "HOST_NAME name is ${{toJson(steps)}}"     
+          echo "HOST_NAME name is ${{toJson(runner)}}"     
+          echo "HOST_NAME name is ${{toJson(secrets)}}"     
+          echo "HOST_NAME name is ${{toJson(strategy)}}"     
+          echo "HOST_NAME name is ${{toJson(matrix)}}"     
+          echo "HOST_NAME name is ${{toJson(needs)}}"     
+          echo "HOST_NAME name is ${{toJson(inputs)}}"     
+          echo "======================"               

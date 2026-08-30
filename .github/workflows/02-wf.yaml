@@ -1,0 +1,21 @@
+name: workflow-2
+on:
+  workflow_run:
+    workflows:
+      - workflow-1
+    types:
+      - completed
+
+jobs:
+
+  first-job:
+    runs-on: ubuntu-slim
+    if: ${{github.event.workflow_run.conclusion == 'success'}}
+    steps:
+      - name: this is step 1 
+        run: |
+          echo "this workflow 2 run"
+          
+      - name: this is step 2
+        run: |
+          echo "this workflow 2 run"
