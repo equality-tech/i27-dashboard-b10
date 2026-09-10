@@ -1,33 +1,40 @@
-name: env var demo
-on: 
-  workflow_dispatch:
-    inputs:
-      select_env:
-        default: Testing
-        description: this is to select the environment before running
-        type: choice
-        options:
-          - Testing
-          - Developement
-          - Production
+## checkout
+## java 21
+## run tests
+## upload artifacts
+
+## build - checkout
+## setup java 21
+## package
+## upload artifacts
+
+name: this is demo of ci
+on: workflow_dispatch
 
 jobs:
-  job:
-    environment: ${{inputs.select_env}}
-    runs-on: ubuntu-latest    
+  test-job:
+    name: run tests job
+    runs-on: ubuntu-24.04
+    
     steps:
-      - name: job1 step1 statements        
-        run: |
-          echo "======================"
-          echo "HOST_NAME name is ${{toJson(github)}}"     
-          echo "HOST_NAME name is ${{toJson(runner)}}"     
-          echo "HOST_NAME name is ${{toJson(vars)}}"     
-          echo "HOST_NAME name is ${{toJson(job)}}"             
-          echo "HOST_NAME name is ${{toJson(steps)}}"     
-          echo "HOST_NAME name is ${{toJson(runner)}}"     
-          echo "HOST_NAME name is ${{toJson(secrets)}}"     
-          echo "HOST_NAME name is ${{toJson(strategy)}}"     
-          echo "HOST_NAME name is ${{toJson(matrix)}}"     
-          echo "HOST_NAME name is ${{toJson(needs)}}"     
-          echo "HOST_NAME name is ${{toJson(inputs)}}"     
-          echo "======================"               
+      - name: checkout repo
+        uses: actions/checkout@v7
+
+      - name: setup java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          
+      - name: run tests
+        run: mvn test
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          name: surefire reports
+          path: target/surefire-reports/
+          retention-days: 2
+          
+        
