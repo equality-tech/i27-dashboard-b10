@@ -37,6 +37,7 @@ jobs:
   build-package-job: 
     name: build and package
     runs-on: ubuntu-latest
+    needs: build-test-package
     
     steps:  
       - name: docker login
