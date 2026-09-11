@@ -12,34 +12,9 @@ name: this is demo of ci
 on: workflow_dispatch
 
 jobs:
-  test-job:
-    name: run tests job
-    runs-on: ubuntu-24.04
-    
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v7
-
-      - name: setup java
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: '25'
-          cache: maven
-          
-      - name: run tests
-        run: mvn test
-
-      - name: upload artifacts
-        uses: actions/upload-artifact@v7
-        with:
-          name: surefire reports
-          path: target/surefire-reports/
-          retention-days: 2
 
   build-package-job:
     name: build and package job
-    needs: test-job
     runs-on: ubuntu-24.04
     
     steps:
@@ -63,3 +38,18 @@ jobs:
           path: target/*.jar
           retention-days: 2
         
+  download-package-job:
+    name: download package job
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: build-artifact
+          path: ./download-folder
+          retention-days: 2
+      - name: verify the downloaded artifact
+        run: |
+         run: ls -la ./download-folder/
+    
