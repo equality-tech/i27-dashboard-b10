@@ -1,20 +1,13 @@
-## checkout
-## java 21
-## run tests
-## upload artifacts
-
-## build - checkout
-## setup java 21
-## package
-## upload artifacts
-
-name: this is demo of ci
+name: full ci workflow
 on: workflow_dispatch
+
+env:
+  DOCKER_IMAGE_NAME: 'mdbasheer333/i27-academy-dashboard'
 
 jobs:
 
-  build-package-job:
-    name: build and package job
+  build-test-package:
+    name: build, test and package job
     runs-on: ubuntu-24.04
     
     steps:
@@ -27,9 +20,12 @@ jobs:
           distribution: temurin
           java-version: '25'
           cache: maven
-          
+      
+      - name: test app
+        run: mvn test
+        
       - name: package app
-        run: mvn package -DskipTests
+        run: mvn cleam package -DskipTests
   
       - name: upload artifacts
         uses: actions/upload-artifact@v7
@@ -37,19 +33,24 @@ jobs:
           name: build-artifact
           path: target/*.jar
           retention-days: 2
-        
-  download-package-job:
-    name: download package job
-    runs-on: ubuntu-24.04
-    needs: build-package-job
-    steps:
-      - name: download artifacts
-        uses: actions/download-artifact@v8
-        with:
-          name: build-artifact
-          path: ./download-folder
-          
-      - name: verify the downloaded artifact
-        run: |
-          ls -la ./download-folder/
+  
+  build-package-job: 
+    name: build and package
+    runs-on: ubuntu-latest
     
+    steps:  
+      - name: docker login
+        uses: docker/login-action@v4
+        with:
+          username: ${{vars.DOCKERHUB_USERNAME}}
+          password: ${{secrets.DOCKERHUB_TOKEN}}
+      
+      - name: docker build image
+        run: docker build -t ${{env.DOCKER_IMAGE_NAME}}:${{github.sha}} .
+
+      - name: docker push
+        run: docker push ${{env.DOCKER_IMAGE_NAME}}:${{github.sha}} .
+
+      - name: docker info
+        run: docker images
+     
