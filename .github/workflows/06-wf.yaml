@@ -41,7 +41,7 @@ jobs:
   download-package-job:
     name: download package job
     runs-on: ubuntu-24.04
-    
+    needs: build-package-job
     steps:
       - name: download artifacts
         uses: actions/download-artifact@v8
