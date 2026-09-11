@@ -51,5 +51,5 @@ jobs:
           
       - name: verify the downloaded artifact
         run: |
-         run: ls -la ./download-folder/
+          ls -la ./download-folder/
     
