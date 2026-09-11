@@ -48,7 +48,7 @@ jobs:
         with:
           name: build-artifact
           path: ./download-folder
-          retention-days: 2
+          
       - name: verify the downloaded artifact
         run: |
          run: ls -la ./download-folder/
