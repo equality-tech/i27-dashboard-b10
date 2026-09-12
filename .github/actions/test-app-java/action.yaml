@@ -5,4 +5,5 @@ runs:
   using: composite
   steps:
   - name: just echo
-    run:  echo "hello world"
+    run: echo "hello world"
+    shell: bash
