@@ -1,0 +1,8 @@
+name: java test app
+description: java test app
+
+runs: 
+  using: composite
+  steps:
+  - name: just echo
+    run:  echo "hello world"
